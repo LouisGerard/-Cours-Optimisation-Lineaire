@@ -73,28 +73,31 @@ Pour notre exemple, la première variable entrante sera $x_1$, puis $x_2$
 
 ### Choix de la variable sortante
 On va voir quelle variable sortante est la plus contraignante pour la variable entrante.
-On va donc choisir la variable sortante correspondant à la ligne de $B$:
-- S'il s'agit d'un problème de minimisation :
-  $max(-B\{1, x\})$
-- S'il s'agit d'un problème de maximisation :
-  $min(-B\{1, x\})$
+On va donc choisir la variable sortante correspondant à la ligne de $C$ dont la somme est maximale pour un problème de minimisation et insversement:
+$C = \frac{B}{B_i}$ pour la variable entrante $x_i$
 
 #### Exemple
-Il s'agit ici d'un problème de maximisation, on va donc prendre
-$min(-B\{1, x\}) = $
-$min(-\begin{bmatrix}
+Notre variable entrante est $x_1$, le premier élément de $x$. On va donc obtenir $C$ en divisant $B$ par $B_1$ :
+$C = \frac{\begin{bmatrix}
   400 & -1 & -1 \\
   600 & -2 & -1
-\end{bmatrix} \{1, x_1, x_2\}) = $
-$min(\begin{bmatrix}
+\end{bmatrix}}{\begin{bmatrix}-1 \\ -2\end{bmatrix}} = \begin{bmatrix}
   -400 & 1 & 1 \\
-  -600 & 2 & 1
-\end{bmatrix} \{1, 0, 0\}) = $
-$min(\begin{bmatrix}
-  -400 & 0 & 0 \\
-  -600 & 0 & 0
-\end{bmatrix}) = -600$
-Il s'agit donc de la deuxième ligne, on va donc prendre la première variable sortante : $x_4$
+  -300 & 1 & 1/2
+\end{bmatrix}$
+
+On fait maintenant la somme ligne par ligne :
+$-400 + 1 + 1 = -398$
+$-300 + 1 + 1/2 = -298.5$
+
+Puisqu'il s'agit d'un problème de maximisation, on va prendre le minimum : $-398$
+Il s'agit donc de la première ligne, on va donc prendre la première variable sortante : $x_3$
 
 ### Echange de variables
 On va maintenant pouvoir faire rentrer la variable entrante et sortir la variable sortante.
+
+#### Exemple
+$B = \begin{bmatrix}
+  400 & -1 & -1 \\
+  600 & -2 & -1
+\end{bmatrix}$
