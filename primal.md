@@ -14,7 +14,11 @@ export_on_save:
 ---
 
 # Optimisation linéaire
+
+[Retour](index.html)
+
 ## Problème primal
+
 ### Enoncé du problème
 minimisation :
 $min\ zx\ s.t.$
@@ -24,7 +28,18 @@ maximisation :
 $max\ zx\ s.t.$
 $Ax \le b$
 
-# Todo expliquer la notation matricielle
+#### Notation matricielle
+
+Ici, on utilisera des matrices pour noter les équations. Cela nous permettra de définir des formules de résolution.
+Par exemple si on a :
+$A = \begin{bmatrix}
+   1 & 1 \\
+   2 & 1
+\end{bmatrix}$ , $x = \{x_1, x2\}$ et $b = \{400, 600\}$
+alors $Ax \le b$ vaudra :
+$x_2 + x_1 \le 400$
+$2x_2  + x_1 \le 600$
+
 
 #### Exemple
 On considère le cas d’un fabricant d’automobiles qui propose deux modèles à la vente, des grosses voitures et des petites voitures. Les voitures de ce fabriquant sont tellement à la mode qu’il est certain de vendre tout ce qu’il parvient à produire, au moins au prix catalogue actuel de 16000 euros pour les grosses voitures, et 10000 euros pour les petites voitures. Son problème vient de l’approvisionnement limité en deux matières premières, le caoutchouc et l’acier. La construction d’une petite voiture nécessite l’emploi d’une unité de caoutchouc et d’une unité d’acier, tandis que celle d’une grosse voiture nécessite une unité de caoutchouc mais deux unités d’acier. Sachant que son stock de caoutchouc est de 400 unités et son stock d’acier de 600 unités, combien doit-il produire de petites et de grosses voitures au moyen de ces stocks afin de maximiser son chiffre d’affaire ? Nous appellerons x le nombre de grosses voitures produites, y le nombre de petites voitures produites, et z le chiffre d’affaire résultant.
@@ -101,14 +116,34 @@ On fait maintenant la somme ligne par ligne :
 $400 + 0 + 0 = 400$
 $300 + 0 + 0 = 300$
 
-Puisqu'il s'agit d'un problème de maximisation, on va prendre le minimum : $300$
-Il s'agit donc de la deuxième ligne, on va donc prendre la première variable sortante : $x_4$
+Puisqu'il s'agit d'un problème de maximisation, on va prendre le minimum : $x_1 = 300$
+Il s'agit donc de la deuxième ligne, on va donc prendre la deuxième variable sortante : $x_4$
 
 ### Echange de variables
-On va maintenant pouvoir faire rentrer la variable entrante et sortir la variable sortante.
+On va maintenant pouvoir faire rentrer la variable entrante et sortir la variable sortante. On peut donc échanger les éléments dans $x$ et $x_s$.
+Pour mettre à jour $B$, on va commencer par calculer la ligne correspondant à notre variable sortante $B_{\cdot j}$ pour la faire correspondre à notre variable entrante.
+$B_{\cdot j} = \frac{B_{\cdot j}}{-B_{ij}}$
+On pourra ensuite soustraire les autres lignes par $B_{\cdot j}$ :
+$B_{\cdot k} = \frac{B_{\cdot k}}{-B_{ik}} - B_{\cdot j}$ avec $k \neq j$
 
 #### Exemple
+On échange $x_1$ et $x_4$ dans $x$ et $x_s$ :
+$x = \{x_4, x_2\}$
+$x_s = \{x_3, x_1\}$
+
+On adapte la ligne correspondant à $x_4$ pour coller avec $x_1$ :
+$-B_{ij} = -B_{12} = 2$
+$B_{\cdot j} = \begin{bmatrix}
+  600/2 & -1/2 & -1/2
+\end{bmatrix} = \begin{bmatrix}
+  300 & -1/2 & -1/2
+\end{bmatrix}$
+
+On adapte la ligne restante : 
 $B = \begin{bmatrix}
-  400 & -1 & -1 \\
-  600 & -2 & -1
+  400/1-300 & -1/1+1/2 & 1/1-1/2 \\
+  300 & -1/2 & -1/2
+\end{bmatrix} = \begin{bmatrix}
+  100 & -1/2 & 1/2 \\
+  300 & -1/2 & -1/2
 \end{bmatrix}$
