@@ -65,6 +65,8 @@ $B = \begin{bmatrix}
   600 & -2 & -1
 \end{bmatrix}$
 
+Pour l'instant on a $x_1 = x_2 = x_3 = x_4 = 0$
+
 ### Choix de la variables entrante
 Pour éviter les cycles, on va choisir $x_i$ comme variable entrante dans l'ordre des $i$
 
@@ -73,25 +75,34 @@ Pour notre exemple, la première variable entrante sera $x_1$, puis $x_2$
 
 ### Choix de la variable sortante
 On va voir quelle variable sortante est la plus contraignante pour la variable entrante.
-On va donc choisir la variable sortante correspondant à la ligne de $C$ dont la somme est maximale pour un problème de minimisation et insversement:
-$C = \frac{B}{B_i}$ pour la variable entrante $x_i$
+On créé une matrice de résolution $C$ telle que la colonne de la variable entrante est égale à $-1$ :
+$C = \frac{B}{-B_i}$ pour la variable entrante $x_i$
+On va donc choisir la variable sortante correspondant à la ligne de $C\{1, x\}$ dont la somme est maximale pour un problème de minimisation et insversement:
 
 #### Exemple
 Notre variable entrante est $x_1$, le premier élément de $x$. On va donc obtenir $C$ en divisant $B$ par $B_1$ :
 $C = \frac{\begin{bmatrix}
   400 & -1 & -1 \\
   600 & -2 & -1
-\end{bmatrix}}{\begin{bmatrix}-1 \\ -2\end{bmatrix}} = \begin{bmatrix}
-  -400 & 1 & 1 \\
-  -300 & 1 & 1/2
+\end{bmatrix}}{-\begin{bmatrix}-1 \\ -2\end{bmatrix}} = \begin{bmatrix}
+  400 & -1 & -1 \\
+  300 & -1 & -1/2
+\end{bmatrix}$
+
+$C\{1, x\} = C\{1, x_1, x_2\} = \begin{bmatrix}
+  400 & -1 & -1 \\
+  300 & -1 & -1/2
+\end{bmatrix}\{1, 0, 0\} = \begin{bmatrix}
+  400 & 0 & 0 \\
+  300 & 0 & 0
 \end{bmatrix}$
 
 On fait maintenant la somme ligne par ligne :
-$-400 + 1 + 1 = -398$
-$-300 + 1 + 1/2 = -298.5$
+$400 + 0 + 0 = 400$
+$300 + 0 + 0 = 300$
 
-Puisqu'il s'agit d'un problème de maximisation, on va prendre le minimum : $-398$
-Il s'agit donc de la première ligne, on va donc prendre la première variable sortante : $x_3$
+Puisqu'il s'agit d'un problème de maximisation, on va prendre le minimum : $300$
+Il s'agit donc de la deuxième ligne, on va donc prendre la première variable sortante : $x_4$
 
 ### Echange de variables
 On va maintenant pouvoir faire rentrer la variable entrante et sortir la variable sortante.
