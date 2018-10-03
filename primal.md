@@ -2,10 +2,15 @@
 title: "Optimisation linéaire : Problème primal"
 author: Louis GERARD
 date: 2 octobre 2018
-output: pdf_document
+
+html:
+  embed_local_images: true
+  embed_svg: true
+  offline: false
+  toc: undefined
+
 export_on_save:
-  pandoc: true
-wrap: preserve
+  html: true
 ---
 
 # Optimisation linéaire
