@@ -1,5 +1,5 @@
 ---
-title: "Optimisation linéaire : Problème primal"
+title: "Optimisation linéaire : Exemple de problème primal"
 author: Louis GERARD
 date: 2 octobre 2018
 
@@ -16,32 +16,11 @@ export_on_save:
 # Optimisation linéaire
 
 [Retour](index.html)
+[Cours sur les problèmes primaux](primal.html)
 
-## Problème primal
+## Problème primal : Exemple
 
-### Enoncé du problème
-minimisation :
-$min\ zx\ s.t.$
-$Ax \ge b$
-
-maximisation :
-$max\ zx\ s.t.$
-$Ax \le b$
-
-#### Notation matricielle
-
-Ici, on utilisera des matrices pour noter les équations. Cela nous permettra de définir des formules de résolution.
-Par exemple si on a :
-$A = \begin{bmatrix}
-   1 & 1 \\
-   2 & 1
-\end{bmatrix}$ , $x = \{x_1, x2\}$ et $b = \{400, 600\}$
-alors $Ax \le b$ vaudra :
-$x_2 + x_1 \le 400$
-$2x_2  + x_1 \le 600$
-
-
-#### Exemple
+### Enoncé
 On considère le cas d’un fabricant d’automobiles qui propose deux modèles à la vente, des grosses voitures et des petites voitures. Les voitures de ce fabriquant sont tellement à la mode qu’il est certain de vendre tout ce qu’il parvient à produire, au moins au prix catalogue actuel de 16000 euros pour les grosses voitures, et 10000 euros pour les petites voitures. Son problème vient de l’approvisionnement limité en deux matières premières, le caoutchouc et l’acier. La construction d’une petite voiture nécessite l’emploi d’une unité de caoutchouc et d’une unité d’acier, tandis que celle d’une grosse voiture nécessite une unité de caoutchouc mais deux unités d’acier. Sachant que son stock de caoutchouc est de 400 unités et son stock d’acier de 600 unités, combien doit-il produire de petites et de grosses voitures au moyen de ces stocks afin de maximiser son chiffre d’affaire ? Nous appellerons x le nombre de grosses voitures produites, y le nombre de petites voitures produites, et z le chiffre d’affaire résultant.
 
 Le problème se traduit alors sous la forme :
@@ -65,36 +44,14 @@ On peut le résoudre graphiquement comme cela :
 
 On devrait donc trouver une solution $x_1 = 200, x_2 = 200$
 
-### Variables sortantes
-On commence par créer autant de variables sortantes que l'on a de contraintes :
-$x_s$
-et leurs coefficients :
-$B = [b^T; -A]$
-Ces variables sont dans le système et sont égales à zéro. On va essayer de les sortir du système afin de les échanger avec les variables entrantes ($x$).
+### Itération 1
 
-#### Exemple
-Pour le même exemple :
-$x_s = \{x_3, x_4\}$
-$B = \begin{bmatrix}
-  400 & -1 & -1 \\
-  600 & -2 & -1
-\end{bmatrix}$
+#### Choix de la variables entrante
 
-Pour l'instant on a $x_1 = x_2 = x_3 = x_4 = 0$
-
-### Choix de la variables entrante
-Pour éviter les cycles, on va choisir $x_i$ comme variable entrante dans l'ordre des $i$
-
-#### Exemple
 Pour notre exemple, la première variable entrante sera $x_1$, puis $x_2$
 
-### Choix de la variable sortante
-On va voir quelle variable sortante est la plus contraignante pour la variable entrante.
-On créé une matrice de résolution $C$ telle que la colonne de la variable entrante est égale à $-1$ :
-$C = \frac{B}{-B_i}$ pour la variable entrante $x_i$
-On va donc choisir la variable sortante correspondant à la ligne de $C\{1, x\}$ dont la somme est maximale pour un problème de minimisation et insversement:
+#### Choix de la variable sortante
 
-#### Exemple
 Notre variable entrante est $x_1$, le premier élément de $x$. On va donc obtenir $C$ en divisant $B$ par $B_1$ :
 $C = \frac{\begin{bmatrix}
   400 & -1 & -1 \\
@@ -119,14 +76,8 @@ $300 + 0 + 0 = 300$
 Puisqu'il s'agit d'un problème de maximisation, on va prendre le minimum : $x_1 = 300$
 Il s'agit donc de la deuxième ligne, on va donc prendre la deuxième variable sortante : $x_4$
 
-### Echange de variables
-On va maintenant pouvoir faire rentrer la variable entrante et sortir la variable sortante. On peut donc échanger les éléments dans $x$ et $x_s$.
-Pour mettre à jour $B$, on va commencer par calculer la ligne correspondant à notre variable sortante $B_{\cdot j}$ pour la faire correspondre à notre variable entrante.
-$B_{\cdot j} = \frac{B_{\cdot j}}{-B_{ij}}$
-On pourra ensuite soustraire les autres lignes par $B_{\cdot j}$ :
-$B_{\cdot k} = \frac{B_{\cdot k}}{-B_{ik}} - B_{\cdot j}$ avec $k \neq j$
+#### Echange de variables
 
-#### Exemple
 On échange $x_1$ et $x_4$ dans $x$ et $x_s$ :
 $x = \{x_4, x_2\}$
 $x_s = \{x_3, x_1\}$
@@ -148,5 +99,4 @@ $B = \begin{bmatrix}
   300 & -1/2 & -1/2
 \end{bmatrix}$
 
-### Fin
-On va itérer ces opérations jusqu'à obtenir notre solution. Vous pouvez voir l'exemple complet [ici](primal-exemple.html)
+### Itération 2
