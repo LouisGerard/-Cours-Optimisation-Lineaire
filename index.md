@@ -15,4 +15,6 @@ export_on_save:
 
 # Optimisation linéaire
 
-- [Problème primal](primal.html)
+- Problème primal :
+  - [Cours](primal.html)
+  - [Exemple](primal-exemple.html)
