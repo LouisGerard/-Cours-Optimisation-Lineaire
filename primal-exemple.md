@@ -26,8 +26,8 @@ On considère le cas d’un fabricant d’automobiles qui propose deux modèles 
 Le problème se traduit alors sous la forme :
 
 $max\ 16000x_1 + 10000x_2\ s.t.$
-$x_2 + x_1 \le 400$
-$2x_2  + x_1 \le 600$
+$x_1 + x_2 \le 400$
+$2x_1  + x_2 \le 600$
 $x_1 \ge 0, x_2 \ge 0$
 
 Pour ce problème de maximisation, on a :
@@ -44,59 +44,78 @@ On peut le résoudre graphiquement comme cela :
 
 On devrait donc trouver une solution $x_1 = 200, x_2 = 200$
 
-### Itération 1
 
-#### Choix de la variables entrante
 
-Pour notre exemple, la première variable entrante sera $x_1$, puis $x_2$
-
-#### Choix de la variable sortante
-
-Notre variable entrante est $x_1$, le premier élément de $x$. On va donc obtenir $C$ en divisant $B$ par $B_1$ :
-$C = \frac{\begin{bmatrix}
-  400 & -1 & -1 \\
-  600 & -2 & -1
-\end{bmatrix}}{-\begin{bmatrix}-1 \\ -2\end{bmatrix}} = \begin{bmatrix}
-  400 & -1 & -1 \\
-  300 & -1 & -1/2
-\end{bmatrix}$
-
-$C\{1, x\} = C\{1, x_1, x_2\} = \begin{bmatrix}
-  400 & -1 & -1 \\
-  300 & -1 & -1/2
-\end{bmatrix}\{1, 0, 0\} = \begin{bmatrix}
-  400 & 0 & 0 \\
-  300 & 0 & 0
-\end{bmatrix}$
-
-On fait maintenant la somme ligne par ligne :
-$400 + 0 + 0 = 400$
-$300 + 0 + 0 = 300$
-
-Puisqu'il s'agit d'un problème de maximisation, on va prendre le minimum : $x_1 = 300$
-Il s'agit donc de la deuxième ligne, on va donc prendre la deuxième variable sortante : $x_4$
-
-#### Echange de variables
-
-On échange $x_1$ et $x_4$ dans $x$ et $x_s$ :
-$x = \{x_4, x_2\}$
-$x_s = \{x_3, x_1\}$
-
-On adapte la ligne correspondant à $x_4$ pour coller avec $x_1$ :
-$-B_{ij} = -B_{12} = 2$
-$B_{\cdot j} = \begin{bmatrix}
-  600/2 & -1/2 & -1/2
-\end{bmatrix} = \begin{bmatrix}
-  300 & -1/2 & -1/2
-\end{bmatrix}$
-
-On adapte la ligne restante :
 $B = \begin{bmatrix}
-  400/1-300 & -1/1+1/2 & 1/1-1/2 \\
-  300 & -1/2 & -1/2
+  1 & 1 & -1 & 0 \\
+  2 & 1 & 0 & -1
+\end{bmatrix}$
+
+### Itération 1
+variable entrante : $x_1$
+
+$\frac{b}{B_1} = \begin{bmatrix}
+  400/1 \\
+  600/2
 \end{bmatrix} = \begin{bmatrix}
-  100 & -1/2 & 1/2 \\
-  300 & -1/2 & -1/2
+  400 \\
+  300
+\end{bmatrix}$
+
+$B = \begin{bmatrix}
+  1-1 \times 1 & 1 - 1/2 \times 1 & -1 - 1 \times 0 & 0 - 1 \times (-1/2) \\
+  2/2 & 1/2 & 0 & -1/2
+\end{bmatrix} = \begin{bmatrix}
+  0 & 1/2 & -1 & 1/2 \\
+  1 & 1/2 & 0 & -1/2
+\end{bmatrix}$
+
+$b = \begin{bmatrix}
+  400 - 1 \times 300 \\
+  600 / 2
+\end{bmatrix} = \begin{bmatrix}
+  100 \\
+  300
+\end{bmatrix}$
+
+$z = \begin{bmatrix}
+  16000 - 16000 \times 1 \\
+  10000 - 16000 \times 1/2
+\end{bmatrix} = \begin{bmatrix}
+  0 \\
+  2000
 \end{bmatrix}$
 
 ### Itération 2
+variable entrante : $x_2$
+
+$\frac{b}{B_1} = \begin{bmatrix}
+  100 / (1/2) \\
+  300 / (1/2)
+\end{bmatrix} = \begin{bmatrix}
+  200 \\
+  600
+\end{bmatrix}$
+
+$B = \begin{bmatrix}
+  0 & 1 & -2 & 1 \\
+  1 & 0 & -1/2 & -1
+\end{bmatrix}$
+
+$b = \begin{bmatrix}
+  100/(1/2) \\
+  300 - (1/2) \times 200
+\end{bmatrix}= \begin{bmatrix}
+  200 \\
+  200
+\end{bmatrix}$
+
+$z = \begin{bmatrix}
+  0 - 2000 \times 0\\
+  2000 - 2000 \times 1
+\end{bmatrix} = \begin{bmatrix}
+  0 \\
+  0
+\end{bmatrix}$
+
+On a une solution optimale
