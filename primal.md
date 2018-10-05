@@ -179,4 +179,4 @@ $z = \begin{bmatrix}
 Une itération se résume donc ainsi :
 ![croquis](Croquis.png)
 
-On va itérer ces opérations jusqu'à obtenir notre solution, c'est à dire jusqu'à que tous les éléments de z soient positifs s'il s'agit d'un problème de minimisation et insversement. Vous pouvez voir l'exemple complet [ici](primal-exemple.html)
+On va itérer ces opérations jusqu'à obtenir notre solution, c'est à dire jusqu'à que tous les éléments de z soient positifs s'il s'agit d'un problème de minimisation et insversement. Vous pouvez voir l'exemple complet [ici](primal-exemple.html) mais je vous invite à essayer de le finir vous même 😉
